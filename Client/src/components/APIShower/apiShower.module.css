@@ -1,0 +1,215 @@
+.articleAPIShower{
+    background-color: #000000;
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    scroll-snap-align: center;
+    flex-direction: row;
+}
+
+.divLeft{
+    width: 50%;
+    position: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.h2APIShower{
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #000000, 0 0 20px #ffffff;
+}
+
+.detailsAPISh{
+    background-color: #0d0d0d;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    padding: 16px;
+    transition: all .3s ease;
+    border: 1px solid #ccc;
+    width: 60%;
+}
+
+.detailsAPISh[open] {
+    background-color: #000000;
+    color: rgb(173, 154, 45);
+    text-shadow: 0 0 5px #ff5429, 0 0 10px #ff7563, 0 0 15px #ff6d63, 0 0 20px #ff8763;
+}
+
+.divLeft summary{
+    align-self: baseline;
+}
+
+.inputButton{
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+}
+
+.sectionAPIShower{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.divView{
+    margin-top: 13vh;
+    background-color: rgba(255, 255, 255, 0.05);
+    width: 30vw;
+    height: 85vh;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    text-align: left;
+    overflow-y: scroll;
+    border-radius: 1%;
+    transition: 0.4s;
+    &:hover{
+        box-shadow: rgb(232, 86, 33) 0px 0px 20px 3px;
+    }
+}
+
+.data{
+    margin: 0;
+    display: flex;
+    padding: 1rem;
+}
+
+.fieldsetCreateBand{
+    background-color: #0d0d0d;
+    width: 50vw;
+    height: 50vh;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 10vw);
+    grid-template-rows: repeat(3, 5vh);
+    grid-column-gap: 10vw;
+    grid-row-gap: 15vh;
+    justify-items: center;
+    justify-content: center;
+}
+
+.fieldsetCreateBand label{
+    color: rgb(209, 125, 0);
+    text-shadow: 0 0 5px #ff5429, 0 0 10px #ff7563, 0 0 15px #ff6d63, 0 0 20px #ff8763;
+}
+
+.fieldsetCreateBand legend{
+    color: rgb(209, 125, 0);
+    text-shadow: 0 0 5px #ff5429, 0 0 10px #ff7563, 0 0 15px #ff6d63, 0 0 20px #ff8763;
+    font-size: x-large;    
+}
+    
+.divName {
+    width: max-content;
+    height: max-content;
+    gap: 3px;
+    margin-top: 1vh;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    grid-area: 1 / 1 / 2 / 2; 
+}
+
+.inputName{
+    z-index: 20;
+}
+
+.divDiscs {
+    width: max-content;
+    height: 20vh;
+    margin-top: 1vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: 1 / 2 / 2 / 3; 
+    gap: 3px;
+}
+
+.divDiscTags{
+    display: flex;
+    gap: 3px;
+}
+
+.divBandDisc {
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2px;
+    overflow: hidden;
+}
+  
+.divBandDisc p {
+    width: calc(50% - 10px);
+    margin-bottom: 0px;
+}
+
+.divGenres{
+    gap: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    height: max-content;
+    margin: 0;
+    padding: 0;
+    grid-area: 2 / 1 / 3 / 3;
+}
+
+.divGenre{
+    margin: 0;
+    padding: 0;
+    gap: 2px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+}
+
+.divDate {
+    gap: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: max-content;
+    height: max-content;
+    margin: 0;
+    padding: 0;
+    grid-area: 3 / 1 / 4 / 2;
+}
+
+.divMembers { 
+    gap: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: max-content;
+    height: max-content;
+    margin: 0;
+    padding: 0;
+    grid-area: 3 / 2 / 4 / 3; 
+}
+
+.spanErrors{
+    color: red;
+}
+
+.btnSubmit{
+    width: 12vw;
+    height: 3vh;
+    font-size: larger;
+}
+
+.btnClose{
+    position: absolute;
+    right: 25vw;
+    top: 25vh;
+}
