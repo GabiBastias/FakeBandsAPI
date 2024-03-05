@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { createRandomFakeBand, deleteFakeBandById, getAllFakeBands, getBandById, patchFakeBand, updateFakeBand } from "../../services/redux/actions";
 import styles from "./apiShower.module.css";
-import { useDispatch, useSelector } from 'react-redux';
 import APIForm from "./APIForm";
+import { FakeBand } from "../../interfaces/fakeBand";
+import { useAppDispatch, useAppSelector } from "../../services/redux/hooks";
 
 const APIShower = () => {
     const [id, setId] = useState("");
@@ -14,11 +15,11 @@ const APIShower = () => {
         formName: "",
         bandId: ""
     });
-    const allBands = useSelector(state => state.allBands);
-    const language = useSelector(state => state.language);
-    const dispatch = useDispatch();
+    const allBands = useAppSelector(state => state.fakeBands.allBands);
+    const language = useAppSelector(state => state.fakeBands.language);
+    const dispatch = useAppDispatch();
 
-    const handleChange = (event) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "id") setId(event.target.value);
         else if(event.target.name === "updateId") setUpdateId(event.target.value)
         else if(event.target.name === "patchId") setPatchId(event.target.value)
@@ -29,31 +30,34 @@ const APIShower = () => {
         dispatch(getAllFakeBands());
     }
 
-    const handleForm = (event) => {
-        if (event.target.value === "Update Fake Band" && updateId === "") {
+    const handleForm = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+        const buttonValue = (event.target as HTMLButtonElement).value;
+
+        if (buttonValue === "Update Fake Band" && updateId === "") {
             alert("Please insert and ID.");
             setFormManipulation({...formManipulation, manipulate: false});
-        }else if (event.target.value === "Patch Fake Band" && patchId === "") {
+        }else if (buttonValue === "Patch Fake Band" && patchId === "") {
             alert("Please insert and ID.");
             setFormManipulation({...formManipulation, manipulate: false});
         } else {
-            setFormManipulation({...formManipulation, manipulate: true, formName: event.target.value});
+            setFormManipulation({...formManipulation, manipulate: true, formName: buttonValue});
         }
     }
 
-    const handleUpdateOrPatch = (band, type) => {
+    const handleUpdateOrPatch = (band: FakeBand, type: string) => {
         if (type === 'Update Fake Band') {
-            dispatch(updateFakeBand(updateId, band));
+            dispatch(updateFakeBand({id: updateId, fakeBand: band}));
             setUpdateId("");
         }
         else if (type === 'Patch Fake Band') {
-            dispatch(patchFakeBand(patchId, band));
+            dispatch(patchFakeBand({id: patchId, fakeBand: band}));
             setPatchId("");
         }
     }
 
     const handleClose = () => {
-        setFormManipulation(false);
+        setFormManipulation({...formManipulation, manipulate: false});
     }
 
     return(

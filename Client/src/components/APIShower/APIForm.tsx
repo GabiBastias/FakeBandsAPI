@@ -1,34 +1,36 @@
 import { useEffect, useState } from "react";
 import styles from "./apiShower.module.css";
 import inputCreateValidator from "../../services/validator/inputAPICreateValidator";
-import { useDispatch, useSelector } from "react-redux";
-import { createRandomFakeBandByBody } from "../../services/redux/actions";
+import { createFakeBandByBody } from "../../services/redux/actions";
+import { useAppDispatch, useAppSelector } from "../../services/redux/hooks";
+import { formManipulation } from "../../interfaces/defaultValues";
+import { FakeBand } from "../../interfaces/fakeBand";
 
-const emptyBand = {
+const emptyBand: FakeBand = {
     bandName: "",
     bandDiscs: [],
     bandGenres: [],
     startDate: "",
-    numbOfMembers: ""
+    numbOfMembers: 0
 }
 
-const APIForm = ({ manipulate, handleClose, handleUpdateOrPatch, language }) => {
+const APIForm = ({ manipulate, handleClose, handleUpdateOrPatch, language }: {manipulate: formManipulation, handleClose: () => void , handleUpdateOrPatch: (band: FakeBand, type: string) => void, language: string}) => {
 
-    const dispatch = useDispatch();
-    const allGenres = useSelector(state => state.allGenres);
+    const dispatch = useAppDispatch();
+    const allGenres = useAppSelector(state => state.fakeBands.allGenres);
 
     const [ band, setBand ] = useState(emptyBand);
 
     const [ errors, setErrors ] = useState();
 
-    const handleDiscs = (event) => {
+    const handleDiscs = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        const findId = document.getElementById("bandDiscs");
-        setBand({...band, bandDiscs: [...band.bandDiscs, findId.value]})
+        const findId = (document.getElementById("bandDiscs") as HTMLButtonElement).value;
+        setBand({...band, bandDiscs: [...band.bandDiscs, findId]})
     }
 
     useEffect(() => {
-        const divAPIForm = (document.getElementById("APIForm")).classList;
+        const divAPIForm = (document.getElementById("APIForm") as HTMLFormElement).classList;
         if (manipulate.manipulate === true) {
             divAPIForm.remove("showOrNot");
             divAPIForm.add("formCreateBand");
@@ -44,19 +46,23 @@ const APIForm = ({ manipulate, handleClose, handleUpdateOrPatch, language }) => 
         clearInputAndStyles();
     }
 
-    const handleGenres = (event) => {
-        const genresId = document.getElementById(event.target.id);
-        if (band.bandGenres.includes(event.target.value)) {
-            const genFinder = band.bandGenres.filter(gen => gen !== event.target.value);
-            setBand({...band, bandGenres: genFinder});
-            genresId.classList.remove('buttomPressed');
-        } else {
-            setBand({...band, bandGenres: [...band.bandGenres, event.target.value]});
-            genresId.classList.add('buttomPressed');
+    const handleGenres = (event: React.MouseEvent<HTMLButtonElement>) => {
+        const buttonElement = event.target as HTMLButtonElement;
+        const genresId = document.getElementById(buttonElement.id);
+
+        if (genresId) {
+            if (band.bandGenres.includes(buttonElement.value)) {
+                const genFinder = band.bandGenres.filter(gen => gen !== buttonElement.value);
+                setBand({...band, bandGenres: genFinder});
+                genresId.classList.remove('buttomPressed');
+            } else {
+                setBand({...band, bandGenres: [...band.bandGenres, buttonElement.value]});
+                genresId.classList.add('buttomPressed');
+            }
         }
     }
 
-    const handleChange = (event) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.name != "bandDiscs") {
             const updateBand = {...band, [event.target.name]: event.target.value}
             setBand(updateBand);
@@ -77,7 +83,7 @@ const APIForm = ({ manipulate, handleClose, handleUpdateOrPatch, language }) => 
     const handleSubmit = (type) => {
         event.preventDefault();
         if (type === 'Create Fake Band' || type === 'Crear Banda Falsa') {
-            dispatch(createRandomFakeBandByBody(band))
+            dispatch(createFakeBandByBody(band))
         } else if (type === 'Update Fake Band' || type === 'Actualizar Banda') {
             handleUpdateOrPatch(band, type);
         } else if (type === 'Patch Fake Band' || type === 'Parchar Banda') {

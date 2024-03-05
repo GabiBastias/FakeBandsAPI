@@ -1,9 +1,22 @@
-const numberRegex = /^(?:[1-9]|[12][0-9]|30)$/;
+import { Errors } from "../../interfaces/defaultValues";
+import { FakeBand } from "../../interfaces/fakeBand";
+
+const validateNumber = (numero: string): boolean => {
+    const regex = /^(?:[1-9]|[12][0-9]|30)$/;
+    return regex.test(numero);
+}
+
 const textRegex = new RegExp(/^\s+|\s+$/g);
 
-const inputCreateValidator = (data) => {
+const inputCreateValidator = (data: FakeBand) => {
     
-    let errors = {}
+    const errors:Errors = {
+        bandName: "",
+        bandDiscs: "",
+        bandGenres: "",
+        startDate: "",
+        numbOfMembers: ""
+    };
 
     if (!data.bandName) {
         errors.bandName = "This input can't be empty.";
@@ -15,7 +28,7 @@ const inputCreateValidator = (data) => {
         errors.bandDiscs = "Please insert at least one Disc name."
     }
 
-    if (data.bandGenres < 1) {
+    if (data.bandGenres.length < 1) {
         errors.bandGenres = "Please insert at least one Genre."
     }
 
@@ -25,10 +38,9 @@ const inputCreateValidator = (data) => {
 
     if (!data.numbOfMembers) {
         errors.numbOfMembers = "Please insert a number of members."
-    } else if (!numberRegex.test(data.numbOfMembers)) {
+    } else if (validateNumber(data.numbOfMembers.toString())) {
         errors.numbOfMembers = "The value must be a number."
     }
-
 
     return errors;
 }

@@ -1,137 +1,59 @@
-import { FakeBand } from "../../interfaces/fakeBand";
-import { FakeBandGenre } from "../../interfaces/fakeBandGenre";
-import { Actions } from "../../interfaces/actions";
-import { ALL_BANDS, ALL_GENRES, BANDS_BY_ID, CREATE_RANDOM_BAND, CREATE_RANDOM_BAND_BY_BODY, DELETE_BAND, LANGUAJE, PATCH_BAND, UPDATE_BAND } from "./actionTypes";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FakeBand, FakeBandGenre } from '../../interfaces/fakeBand';
+import { State } from '../../interfaces/redux';
 
-const initialState = {
-    allBandsCopy: [] as FakeBand[],
-    allBands: [] as FakeBand[],
-    allGenres: [] as FakeBandGenre[],
-    language: "Spanish"
-}
+const initialState: State = {
+    allBandsCopy: [],
+    allBands: [],
+    allGenres: [],
+    language: 'Spanish',
+};
 
-const reducer = (state = initialState, action:Actions) => {
-    switch (action.type) {
-        case LANGUAJE:
-            return{
-                ...state,
-                language: action.payload
-            }
-        case ALL_BANDS:
-            return {
-                ...state,
-                allBandsCopy: [...action.payload],
-                allBands: [...action.payload]
-            }
-        case ALL_GENRES:
-            return {
-                ...state,
-                allGenres: [...action.payload] 
-            }
-        case BANDS_BY_ID:
-            return {
-                ...state,
-                allBands: action.payload
-            }
-        case CREATE_RANDOM_BAND:
-            return {
-                ...state,
-                allBands: action.payload
-            }
-        case CREATE_RANDOM_BAND_BY_BODY:
-            return {
-                ...state,
-                allBands: action.payload
-            }
-        case UPDATE_BAND:
-            return {
-                ...state,
-                allBands: action.payload
-            }
-        case PATCH_BAND:
-            return {
-                ...state,
-                allBands: action.payload
-            }
-        case DELETE_BAND:
-            return {
-                ...state,
-                allBands: action.payload
-            }
-        default:
-            return {
-                ...state
-            }
-    }
-}
+const fakeBandsReducer = createSlice({
+    name: 'fakeBands',
+    initialState,
+    reducers: {
+        setLanguage(state, action: PayloadAction<string>) {
+            state.language = action.payload;
+        },
+        setAllBands(state, action: PayloadAction<FakeBand[]>) {
+            state.allBandsCopy = action.payload;
+            state.allBands = action.payload;
+        },
+        setAllGenres(state, action: PayloadAction<FakeBandGenre[]>) {
+            state.allGenres = action.payload;
+        },
+        setBandsById(state, action: PayloadAction<FakeBand[]>) {
+            state.allBands = action.payload;
+        },
+        createRandomBand(state, action: PayloadAction<FakeBand[]>) {
+            state.allBands = action.payload;
+        },
+        createBandByBody(state, action: PayloadAction<FakeBand[]>) {
+            state.allBands = action.payload;
+        },
+        updateBand(state, action: PayloadAction<FakeBand[]>) {
+            state.allBands = action.payload;
+        },
+        patchBand(state, action: PayloadAction<FakeBand[]>) {
+            state.allBands = action.payload;
+        },
+        deleteBand(state, action: PayloadAction<FakeBand[]>) {
+            state.allBands = action.payload;
+        },
+    },
+});
 
-export default reducer;
+export const { 
+    setLanguage, 
+    setAllBands, 
+    setAllGenres, 
+    setBandsById, 
+    createRandomBand, 
+    createBandByBody, 
+    updateBand, 
+    patchBand, 
+    deleteBand 
+} = fakeBandsReducer.actions;
 
-
-// import { State } from "../../interfaces/State";
-// import { Actions } from "../../interfaces/actions";
-// import { ALL_BANDS, ALL_GENRES, BANDS_BY_ID, CREATE_RANDOM_BAND, CREATE_RANDOM_BAND_BY_BODY, DELETE_BAND, LANGUAJE, PATCH_BAND, UPDATE_BAND } from "./actionTypes";
-
-// const initialState: State = {
-//     allBandsCopy: [],
-//     allBands: [],
-//     allGenres: [],
-//     language: "Spanish"
-// }
-
-// const reducer = (state: State = initialState, action: Actions): State => {
-//     switch (action.type) {
-//         case LANGUAJE:
-//             return{
-//                 ...state,
-//                 language: typeof action.payload === 'string' ? action.payload :state.language
-//             }
-//         case ALL_BANDS:
-//             return {
-//                 ...state,
-//                 allBandsCopy: Array.isArray(action.payload) ? [...action.payload] : [],
-//                 allBands: Array.isArray(action.payload) ? [...action.payload] : []
-//             }
-//         case ALL_GENRES:
-//             return {
-//                 ...state,
-//                 allGenres: Array.isArray(action.payload) ? [...action.payload] : []
-//             }
-//         case BANDS_BY_ID:
-//             return {
-//                 ...state,
-//                 allBands: action.payload
-//             }
-//         case CREATE_RANDOM_BAND:
-//             return {
-//                 ...state,
-//                 allBands: action.payload
-//             }
-//         case CREATE_RANDOM_BAND_BY_BODY:
-//             return {
-//                 ...state,
-//                 allBands: Array.isArray(state.allBands) ?  action.payload : []
-//             }
-//         case UPDATE_BAND:
-//             return {
-//                 ...state,
-//                 allBands: action.payload
-//             }
-//         case PATCH_BAND:
-//             return {
-//                 ...state,
-//                 allBands: action.payload
-//             }
-//         case DELETE_BAND:
-//             return {
-//                 ...state,
-//                 allBands: action.payload
-//             }
-//         default:
-//             return {
-//                 ...state
-//             }
-//     }
-// }
-
-// export default reducer;
+export default fakeBandsReducer.reducer;
