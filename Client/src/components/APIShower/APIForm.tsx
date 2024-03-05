@@ -3,7 +3,7 @@ import styles from "./apiShower.module.css";
 import inputCreateValidator from "../../services/validator/inputAPICreateValidator";
 import { createFakeBandByBody } from "../../services/redux/actions";
 import { useAppDispatch, useAppSelector } from "../../services/redux/hooks";
-import { formManipulation } from "../../interfaces/defaultValues";
+import { Errors, formManipulation } from "../../interfaces/defaultValues";
 import { FakeBand } from "../../interfaces/fakeBand";
 
 const emptyBand: FakeBand = {
@@ -21,7 +21,7 @@ const APIForm = ({ manipulate, handleClose, handleUpdateOrPatch, language }: {ma
 
     const [ band, setBand ] = useState(emptyBand);
 
-    const [ errors, setErrors ] = useState();
+    const [ errors, setErrors ] = useState<Errors>();
 
     const handleDiscs = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -74,23 +74,33 @@ const APIForm = ({ manipulate, handleClose, handleUpdateOrPatch, language }: {ma
     }
 
     const clearInputAndStyles = () => {
-        document.getElementById('bandDiscs').value = "";
-        for (let i = 0; i < allGenres.length; i++) {
-            document.getElementById(allGenres[i]._id).classList.remove('buttomPressed');
+
+        let discInput = (document.getElementById('bandDiscs') as HTMLInputElement).value
+
+        if (discInput) {
+            discInput = "";
+            for (let i = 0; i < allGenres.length; i++) {
+                const allGenresButtons = document.getElementById(allGenres[i]._id);
+                if (allGenresButtons) {
+                    allGenresButtons.classList.remove('buttomPressed');
+                }
+            }
         }
     }
 
-    const handleSubmit = (type) => {
-        event.preventDefault();
-        if (type === 'Create Fake Band' || type === 'Crear Banda Falsa') {
-            dispatch(createFakeBandByBody(band))
-        } else if (type === 'Update Fake Band' || type === 'Actualizar Banda') {
-            handleUpdateOrPatch(band, type);
-        } else if (type === 'Patch Fake Band' || type === 'Parchar Banda') {
-            handleUpdateOrPatch(band, type);
+    const handleSubmit = (type: string) => {
+        if (event) {
+            event.preventDefault();
+            if (type === 'Create Fake Band' || type === 'Crear Banda Falsa') {
+                dispatch(createFakeBandByBody(band))
+            } else if (type === 'Update Fake Band' || type === 'Actualizar Banda') {
+                handleUpdateOrPatch(band, type);
+            } else if (type === 'Patch Fake Band' || type === 'Parchar Banda') {
+                handleUpdateOrPatch(band, type);
+            }
+            clearBand();
+            clearInputAndStyles();
         }
-        clearBand();
-        clearInputAndStyles();
     }
 
     return(
@@ -186,7 +196,7 @@ const APIForm = ({ manipulate, handleClose, handleUpdateOrPatch, language }: {ma
                 <br />
             </fieldset>
             <br />
-            <button disabled={band === emptyBand ? true : false} type="submit" id="sentBtn" className={styles.btnSubmit} onWheel={(e) => e.target.blur()}>Send</button>
+            <button disabled={band === emptyBand ? true : false} type="submit" id="sentBtn" className={styles.btnSubmit} onWheel={(e) => (e.target as HTMLButtonElement).blur()}>Send</button>
             <button type="button" onClick={clearBand} className={styles.btnClose}>X</button>
         </form>
     )
