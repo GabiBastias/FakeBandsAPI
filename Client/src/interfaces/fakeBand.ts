@@ -9,8 +9,8 @@ export interface FakeBand {
 }
 
 export interface FakeBandGenre {
-    _id:string;
-    name:string
+    _id: string;
+    name: string
 }
 
 export interface ResponseFakeBand {

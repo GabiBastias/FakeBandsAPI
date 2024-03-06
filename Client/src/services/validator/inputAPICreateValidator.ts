@@ -1,10 +1,10 @@
 import { Errors } from "../../interfaces/defaultValues";
 import { FakeBand } from "../../interfaces/fakeBand";
 
-const validateNumber = (numero: string): boolean => {
-    const regex = /^(?:[1-9]|[12][0-9]|30)$/;
-    return regex.test(numero);
-}
+// const validateNumber = (numero: string): boolean => {
+//     const regex = /^(?:[1-9]|[12][0-9]|30)$/;
+//     return regex.test(numero);
+// }
 
 const textRegex = new RegExp(/^\s+|\s+$/g);
 
@@ -38,8 +38,8 @@ const inputCreateValidator = (data: FakeBand) => {
 
     if (!data.numbOfMembers) {
         errors.numbOfMembers = "Please insert a number of members."
-    } else if (validateNumber(data.numbOfMembers.toString())) {
-        errors.numbOfMembers = "The value must be a number."
+    } else if (isNaN(data.numbOfMembers) || data.numbOfMembers <= 0) {
+        errors.numbOfMembers = "The value must be an integer."
     }
 
     return errors;

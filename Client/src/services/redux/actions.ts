@@ -17,7 +17,6 @@ export const getAllFakeBands = createAsyncThunk(
     }
 )
 
-
 export const getAllFakeGenres = createAsyncThunk(
     'fakeBands/getAllFakeGenres',
     async () => {
@@ -39,7 +38,6 @@ export const getBandById = createAsyncThunk(
         return data;
     }
 );
-
 
 export const createRandomFakeBand = createAsyncThunk(
     'bands/createRandomFakeBand',

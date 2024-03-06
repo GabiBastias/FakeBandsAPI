@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FakeBand, FakeBandGenre } from '../../interfaces/fakeBand';
+import { FakeBand, FakeBandGenre, ResponseFakeBand } from '../../interfaces/fakeBand';
 import { State } from '../../interfaces/redux';
 
 const initialState: State = {
@@ -23,22 +23,7 @@ const fakeBandsReducer = createSlice({
         setAllGenres(state, action: PayloadAction<FakeBandGenre[]>) {
             state.allGenres = action.payload;
         },
-        setBandsById(state, action: PayloadAction<FakeBand[]>) {
-            state.allBands = action.payload;
-        },
-        createRandomBand(state, action: PayloadAction<FakeBand[]>) {
-            state.allBands = action.payload;
-        },
-        createBandByBody(state, action: PayloadAction<FakeBand[]>) {
-            state.allBands = action.payload;
-        },
-        updateBand(state, action: PayloadAction<FakeBand[]>) {
-            state.allBands = action.payload;
-        },
-        patchBand(state, action: PayloadAction<FakeBand[]>) {
-            state.allBands = action.payload;
-        },
-        deleteBand(state, action: PayloadAction<FakeBand[]>) {
+        ManupulateResponseFakeBand(state, action: PayloadAction<ResponseFakeBand>) {
             state.allBands = action.payload;
         },
     },
@@ -48,12 +33,7 @@ export const {
     setLanguage, 
     setAllBands, 
     setAllGenres, 
-    setBandsById, 
-    createRandomBand, 
-    createBandByBody, 
-    updateBand, 
-    patchBand, 
-    deleteBand 
+    ManupulateResponseFakeBand,
 } = fakeBandsReducer.actions;
 
 export default fakeBandsReducer.reducer;

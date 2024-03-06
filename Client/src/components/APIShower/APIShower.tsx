@@ -4,6 +4,7 @@ import styles from "./apiShower.module.css";
 import APIForm from "./APIForm";
 import { FakeBand } from "../../interfaces/fakeBand";
 import { useAppDispatch, useAppSelector } from "../../services/redux/hooks";
+import { ManupulateResponseFakeBand, setAllBands } from "../../services/redux/reducer";
 
 const APIShower = () => {
     const [id, setId] = useState("");
@@ -27,7 +28,13 @@ const APIShower = () => {
     }
 
     const handleBands = () => {
-        dispatch(getAllFakeBands());
+        dispatch(getAllFakeBands())
+        .then((data) => {
+            dispatch(setAllBands(data.payload));
+        })
+        .catch((error) => {
+            console.error("Error fetching fake bands:", error);
+        });
     }
 
     const handleForm = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -47,11 +54,19 @@ const APIShower = () => {
 
     const handleUpdateOrPatch = (band: FakeBand, type: string) => {
         if (type === 'Update Fake Band') {
-            dispatch(updateFakeBand({id: updateId, fakeBand: band}));
+            dispatch(updateFakeBand({id: updateId, fakeBand: band}))
+            .then(data => {
+                dispatch(ManupulateResponseFakeBand(data.payload.band))
+                alert(data.payload.message)
+            });
             setUpdateId("");
         }
         else if (type === 'Patch Fake Band') {
-            dispatch(patchFakeBand({id: patchId, fakeBand: band}));
+            dispatch(patchFakeBand({id: patchId, fakeBand: band}))
+            .then(data => {
+                dispatch(ManupulateResponseFakeBand(data.payload.band))
+                alert(data.payload.message)
+            });
             setPatchId("");
         }
     }
@@ -74,13 +89,25 @@ const APIShower = () => {
                     <br />
                     <div className={styles.inputButton}>
                         <input onChange={handleChange} name="id" value={id} type="text" placeholder={language === "Spanish" ? 'Ingrese el ID' : 'Insert the ID...'}/>
-                        <button onClick={() => {dispatch(getBandById(id)); setId("")}}>X</button>
+                        <button onClick={() => {
+                            dispatch(getBandById(id))
+                            .then(data => dispatch(ManupulateResponseFakeBand(data.payload)))
+                            .catch(error => alert(error.message)); 
+                            setId("")
+                        }}>X</button>
                     </div>
                 </details>
                 <details className={styles.detailsAPISh} name="fakeBand">
                     <summary>{language === "Spanish" ? 'Crear Banda Falsa Aleatoria' : 'Create Random Fake Band'} </summary>
                     <br />
-                    <button onClick={() => dispatch(createRandomFakeBand())}>{language === "Spanish" ? 'Crear Banda Falsa Aleatoria' : 'Create Random Fake Band'}</button>
+                    <button onClick={() => 
+                        dispatch(createRandomFakeBand())
+                        .then(data => {
+                            dispatch(ManupulateResponseFakeBand(data.payload.band))
+                            alert(data.payload.message)
+                        })
+                        .catch(error => alert(error.message))
+                    }>{language === "Spanish" ? 'Crear Banda Falsa Aleatoria' : 'Create Random Fake Band'}</button>
                 </details>
                 <details className={styles.detailsAPISh} name="fakeBand">
                     <summary>{language === "Spanish" ? 'Crear Banda Falsa' : 'Create Fake Band'} </summary>
@@ -108,7 +135,14 @@ const APIShower = () => {
                     <br />
                     <div className={styles.inputButton}>
                         <input type="text" onChange={handleChange} name="deleteId" value={deleteId}placeholder={language === "Spanish" ? 'Ingrese el ID' : 'Insert the ID...'}/>
-                        <button onClick={() => {dispatch(deleteFakeBandById(deleteId)); setDeleteId("")}}>X</button>
+                        <button onClick={() => {
+                            dispatch(deleteFakeBandById(deleteId))
+                            .then(data => {
+                                dispatch(ManupulateResponseFakeBand(data.payload.band))
+                                alert(data.payload.message)
+                            })
+                            setDeleteId("")}
+                        }>X</button>
                     </div>
                 </details>
             </div>

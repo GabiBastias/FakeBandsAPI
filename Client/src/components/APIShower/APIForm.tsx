@@ -5,6 +5,7 @@ import { createFakeBandByBody } from "../../services/redux/actions";
 import { useAppDispatch, useAppSelector } from "../../services/redux/hooks";
 import { Errors, formManipulation } from "../../interfaces/defaultValues";
 import { FakeBand } from "../../interfaces/fakeBand";
+import { ManupulateResponseFakeBand } from "../../services/redux/reducer";
 
 const emptyBand: FakeBand = {
     bandName: "",
@@ -26,7 +27,7 @@ const APIForm = ({ manipulate, handleClose, handleUpdateOrPatch, language }: {ma
     const handleDiscs = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         const findId = (document.getElementById("bandDiscs") as HTMLButtonElement).value;
-        setBand({...band, bandDiscs: [...band.bandDiscs, findId]})
+        setBand({...band, bandDiscs: [...band.bandDiscs, findId]});
     }
 
     useEffect(() => {
@@ -74,16 +75,12 @@ const APIForm = ({ manipulate, handleClose, handleUpdateOrPatch, language }: {ma
     }
 
     const clearInputAndStyles = () => {
-
-        let discInput = (document.getElementById('bandDiscs') as HTMLInputElement).value
-
-        if (discInput) {
-            discInput = "";
-            for (let i = 0; i < allGenres.length; i++) {
-                const allGenresButtons = document.getElementById(allGenres[i]._id);
-                if (allGenresButtons) {
-                    allGenresButtons.classList.remove('buttomPressed');
-                }
+        const discInput = (document.getElementById('bandDiscs') as HTMLInputElement).value        
+        if (discInput) (document.getElementById('bandDiscs') as HTMLInputElement).value = "";
+        for (let i = 0; i < allGenres.length; i++) {
+            const allGenresButtons = document.getElementById(allGenres[i]._id);
+            if (allGenresButtons) {
+                allGenresButtons.classList.remove('buttomPressed');
             }
         }
     }
@@ -93,6 +90,10 @@ const APIForm = ({ manipulate, handleClose, handleUpdateOrPatch, language }: {ma
             event.preventDefault();
             if (type === 'Create Fake Band' || type === 'Crear Banda Falsa') {
                 dispatch(createFakeBandByBody(band))
+                .then(data => {
+                    dispatch(ManupulateResponseFakeBand(data.payload.band))
+                    alert(data.payload.message)
+                })
             } else if (type === 'Update Fake Band' || type === 'Actualizar Banda') {
                 handleUpdateOrPatch(band, type);
             } else if (type === 'Patch Fake Band' || type === 'Parchar Banda') {
@@ -114,6 +115,7 @@ const APIForm = ({ manipulate, handleClose, handleUpdateOrPatch, language }: {ma
                         name="bandName"
                         value={band.bandName}
                         onChange={handleChange}
+                        placeholder={language === "Spanish" ? 'Ingrese el nombre de la banda' : 'Insert the band name'}
                         className={styles.inputName}
                     />
                     {
