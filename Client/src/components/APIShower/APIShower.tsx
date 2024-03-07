@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createRandomFakeBand, deleteFakeBandById, getAllFakeBands, getBandById, patchFakeBand, updateFakeBand } from "../../services/redux/actions";
 import styles from "./apiShower.module.css";
 import APIForm from "./APIForm";
+import BackgroundFands from "../../assets/BackgroundBands.png";
 import { FakeBand } from "../../interfaces/fakeBand";
 import { useAppDispatch, useAppSelector } from "../../services/redux/hooks";
 import { ManupulateResponseFakeBand, setAllBands } from "../../services/redux/reducer";
@@ -149,6 +150,7 @@ const APIShower = () => {
             <APIForm language={language} manipulate={formManipulation} handleClose={handleClose} handleUpdateOrPatch={handleUpdateOrPatch}/>
             <section className={styles.sectionAPIShower}>
                 <div className={styles.divView}>
+                    <img className={styles.backgroundBands} src={BackgroundFands} alt="backgroundBands" />
                     <pre className={styles.data}>{JSON.stringify(allBands, null, 2)}</pre>
                 </div>
             </section>

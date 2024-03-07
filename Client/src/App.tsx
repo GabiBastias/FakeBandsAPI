@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import './App.css'
+import backgroundIMG from './assets/PageBackground.png'
 import APIShower from './components/APIShower/APIShower'
 import { useAppDispatch } from './services/redux/hooks'
 import { getAllFakeGenres } from './services/redux/actions';
@@ -22,9 +23,10 @@ function App() {
   }, [])
 
   return (
-    <>
+    <main>
+      <img className='backgroundIMGbody' src={backgroundIMG} alt="backgoundIMG" />
       <APIShower />
-    </>
+    </main>
   )
 }
 

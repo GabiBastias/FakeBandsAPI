@@ -1,5 +1,5 @@
 .articleAPIShower{
-    background-color: #000000;
+    background-color: transparent;
     display: flex;
     position: relative;
     width: 100%;
@@ -32,7 +32,7 @@ summary{
     border-radius: 4px;
     padding: 16px;
     transition: all .3s ease;
-    border: 1px solid #ccc;
+    border: 1px solid #0000001a;
     width: 60%;
 }
 
@@ -40,6 +40,7 @@ summary{
     background-color: #000000;
     color: rgb(148, 153, 253);
     text-shadow: 0 0 5px #4929ff, 0 0 10px rgb(122, 99, 255), 0 0 15px #6d63ff, 0 0 20px #6663ff;
+    border: 1px solid #0000001a;
 }
 
 .divLeft summary{
@@ -72,13 +73,27 @@ summary{
     transition: 0.4s;
     &:hover{
         box-shadow: rgb(46, 33, 232) 0px 0px 20px 3px;
+        & .backgroundBands{
+            filter: brightness(30%);
+        }
     }
+}
+
+.backgroundBands{
+    position: absolute;
+    width: 30vw;
+    height: 85vh;
+    border-radius: 1%;
+    z-index: 0;
+    filter: brightness(20%);
+    transition: 0.4s;
 }
 
 .data{
     margin: 0;
     display: flex;
     padding: 1rem;
+    z-index: 1;
 }
 
 .fieldsetCreateBand{
