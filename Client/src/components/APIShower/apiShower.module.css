@@ -18,7 +18,8 @@
 }
 
 .h2APIShower{
-    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #000000, 0 0 20px #ffffff;
+    color: #2962ff;
+    text-shadow: 0 0 5px #4929ff, 0 0 10px #000000, 0 0 15px #000000, 0 0 20px #ffffff;
 }
 
 summary{
@@ -38,7 +39,7 @@ summary{
 .detailsAPISh[open] {
     background-color: #000000;
     color: rgb(148, 153, 253);
-    text-shadow: 0 0 5px rgb(73, 41, 255), 0 0 10px rgb(122, 99, 255), 0 0 15px #6d63ff, 0 0 20px #6663ff;
+    text-shadow: 0 0 5px #4929ff, 0 0 10px rgb(122, 99, 255), 0 0 15px #6d63ff, 0 0 20px #6663ff;
 }
 
 .divLeft summary{
