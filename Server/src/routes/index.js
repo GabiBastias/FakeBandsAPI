@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { createFakeBand, fakeGenres,  } = require("../utils/faker");
+const { createFakeBand, fakeGenres } = require("../utils/faker");
 
 router.get("/faker", async(req, res, next) => {
     try {

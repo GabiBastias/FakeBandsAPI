@@ -13,7 +13,7 @@ export const getAllFakeBands = createAsyncThunk(
         const response = await fetch(`${backURL}/fakeBands`);
         if (!response.ok) throw new Error("Failed to fetch Bands");
         const data = await response.json();
-        return data
+        return data;
     }
 )
 
