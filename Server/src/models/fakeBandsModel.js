@@ -11,6 +11,9 @@ const FakeBandsSchema = new mongoose.Schema({
     genres: {
         type: Array
     },
+    bandImage:{
+        type: String  
+    },
     startDate: {
         type: String
     },

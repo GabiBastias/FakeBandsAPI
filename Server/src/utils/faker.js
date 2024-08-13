@@ -7,11 +7,12 @@ const createFakeBand = async (json) => {
     try {
         
         let data = [];
-        const fakeGenres = [];
+        const bandName = `${faker.vehicle.model()} ${faker.animal.snake()}`
         const fakeDiscNames = [];
+        const fakeGenres = [];
+        const bandImage = "";
         const startingYear = faker.number.int({ min: 1920, max: 1998})
         const dateNowYear = new Date().getFullYear();
-        const bandName = `${faker.vehicle.model()} ${faker.animal.snake()}`
         const startingDate = faker.date.birthdate({ min: startingYear, max: dateNowYear - 1, mode: 'year' });
         const startDate = `${startingDate.getDate()}/${startingDate.getMonth()}/${startingDate.getFullYear()} `
         for (let i = 0; i < faker.number.int({ min: 1, max: 10}); i++) {
@@ -25,9 +26,10 @@ const createFakeBand = async (json) => {
             band: bandName,
             discs: fakeDiscNames,
             genres: fakeGenres,
+            bandImage: bandImage,
             startDate: startDate,
             activeYears: maxYear,
-            numbOfMembers: faker.number.int({ min: 1, max: 10 })    
+            numbOfMembers: faker.number.int({ min: 1, max: 10 })
         }
 
         if (json) {
