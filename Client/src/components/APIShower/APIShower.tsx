@@ -6,6 +6,7 @@ import BackgroundFands from "../../assets/BackgroundBands.png";
 import { FakeBand } from "../../interfaces/fakeBand";
 import { useAppDispatch, useAppSelector } from "../../services/redux/hooks";
 import { ManupulateResponseFakeBand, setAllBands } from "../../services/redux/reducer";
+import BandCard from "../Card/BandCard";
 
 const APIShower = () => {
     const [id, setId] = useState("");
@@ -33,7 +34,7 @@ const APIShower = () => {
         .then((data) => {
             dispatch(setAllBands(data.payload));
         })
-        .catch((error) => {
+        .catch((error) => {            
             console.error("Error fetching fake bands:", error);
         });
     }
@@ -149,10 +150,15 @@ const APIShower = () => {
             </div>
             <APIForm language={language} manipulate={formManipulation} handleClose={handleClose} handleUpdateOrPatch={handleUpdateOrPatch}/>
             <section className={styles.sectionAPIShower}>
-                <div className={styles.divView}>
+                <ul>{Array.isArray(allBands) &&
+                        allBands.map((band) => {
+                            return <BandCard key={band._id} band={band} />;
+                        }     
+                )}</ul>
+                {/* <div className={styles.divView}>
                     <img className={styles.backgroundBands} src={BackgroundFands} alt="backgroundBands" />
                     <pre className={styles.data}>{JSON.stringify(allBands, null, 2)}</pre>
-                </div>
+                </div> */}
             </section>
         </article>
     )

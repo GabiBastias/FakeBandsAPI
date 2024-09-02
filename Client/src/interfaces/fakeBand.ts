@@ -1,8 +1,9 @@
 export interface FakeBand {
-    id?: string;
-    bandName: string;
-    bandDiscs: string[];
-    bandGenres: string[];
+    _id?: string;
+    band: string;
+    discs: string[];
+    genres: string[];
+    bandImage: string;
     startDate: string;
     activeYears?: number;
     numbOfMembers: number;
@@ -10,10 +11,14 @@ export interface FakeBand {
 
 export interface FakeBandGenre {
     _id: string;
-    name: string
+    name: string;
 }
 
 export interface ResponseFakeBand {
     message: string;
+    band: FakeBand;
+}
+
+export interface BandCardProps {
     band: FakeBand;
 }

@@ -8,6 +8,9 @@ dependencies:
   '@reduxjs/toolkit':
     specifier: ^2.2.1
     version: 2.2.1(react-redux@9.1.0)(react@18.2.0)
+  client:
+    specifier: 'file:'
+    version: file:(@types/react@18.2.61)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -1735,3 +1738,20 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  file:(@types/react@18.2.61):
+    resolution: {directory: '', type: directory}
+    id: 'file:'
+    name: client
+    dependencies:
+      '@reduxjs/toolkit': 2.2.1(react-redux@9.1.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-redux: 9.1.0(@types/react@18.2.61)(react@18.2.0)(redux@5.0.1)
+      react-router-dom: 6.22.2(react-dom@18.2.0)(react@18.2.0)
+      redux: 5.0.1
+      redux-thunk: 3.1.0(redux@5.0.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-native
+    dev: false

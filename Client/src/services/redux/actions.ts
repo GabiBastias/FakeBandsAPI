@@ -91,9 +91,9 @@ export const patchFakeBand = createAsyncThunk(
     'bands/updateFakeBand',
     async ({id, fakeBand}: {id: string, fakeBand: FakeBand}) => {
         const newBand = {
-            band: fakeBand.bandName,
-            discs: fakeBand.bandDiscs,
-            genres: fakeBand.bandGenres,
+            band: fakeBand.band,
+            discs: fakeBand.discs,
+            genres: fakeBand.genres,
             startDate: fakeBand.startDate,
             numbOfMembers: fakeBand.numbOfMembers
         }

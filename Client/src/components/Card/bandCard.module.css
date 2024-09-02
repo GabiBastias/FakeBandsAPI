@@ -1,0 +1,29 @@
+.mainCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20vh;
+    height: 20vw;
+}
+
+.cardImg{
+    width: 20vh;
+    height: 20vw;
+    display: flex;
+    position: relative;
+}
+
+.cardDetails{
+    width: 20vh;
+    height: 20vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.detailedList{
+    font-size: small;
+    padding: 0px;
+    list-style: none;
+}

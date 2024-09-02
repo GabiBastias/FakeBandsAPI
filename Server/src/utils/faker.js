@@ -2,6 +2,7 @@ const { faker } = require('@faker-js/faker');
 const fs = require("node:fs/promises");
 const path = require("path");
 const FakeGenre = require('../models/fakeGenresModel');
+const picsumURL = "https://picsum.photos/200/300?text"
 
 const createFakeBand = async (json) => {
     try {
@@ -10,7 +11,7 @@ const createFakeBand = async (json) => {
         const bandName = `${faker.vehicle.model()} ${faker.animal.snake()}`
         const fakeDiscNames = [];
         const fakeGenres = [];
-        const bandImage = "";
+        const bandImage = await fetch(`${picsumURL}=${bandName}`).then(response => response.url)
         const startingYear = faker.number.int({ min: 1920, max: 1998})
         const dateNowYear = new Date().getFullYear();
         const startingDate = faker.date.birthdate({ min: startingYear, max: dateNowYear - 1, mode: 'year' });
