@@ -2,15 +2,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20vh;
-    height: 20vw;
+    width: 25vh;
+    height: 25vw;
+    transition: 0.3s;
 }
 
 .cardImg{
-    width: 20vh;
-    height: 20vw;
+    width: 25vh;
+    height: 25vw;
+    filter: blur(0.2rem) brightness(40%);  
     display: flex;
     position: relative;
+    transition: 0.3s;
 }
 
 .cardDetails{
@@ -20,10 +23,47 @@
     justify-content: center;
     align-items: center;
     position: absolute;
+    transition: 0.3s;
 }
 
 .detailedList{
-    font-size: small;
+    text-align: left;
+    font-size: 1vw;
+    font-family: sans-serif;
     padding: 0px;
     list-style: none;
+    transition: 0.3s;
+}
+
+.discList{
+    padding-left: 10px;
+    text-align: left;
+    list-style: inside;
+    transition: 0.3s;
+}
+
+@media screen and (max-width: 800px) {
+
+    .mainCard{
+        width: 150px;
+        height: 150px;
+    }
+    
+    .cardImg{
+        width: 150px;
+        height: 150px;
+    }
+    
+    .cardDetails{
+        width: 150px;
+        height: 150px;
+    }
+
+    .detailedList{
+        text-align: left;
+        font-size: 7px;
+        font-family: sans-serif;
+        padding: 0px;
+        list-style: none;
+    }
 }

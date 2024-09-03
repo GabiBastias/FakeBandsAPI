@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createRandomFakeBand, deleteFakeBandById, getAllFakeBands, getBandById, patchFakeBand, updateFakeBand } from "../../services/redux/actions";
 import styles from "./apiShower.module.css";
 import APIForm from "./APIForm";
+import buttonChangeSVG from "../../assets/buttonChange.svg";
 import BackgroundFands from "../../assets/BackgroundBands.png";
 import { FakeBand } from "../../interfaces/fakeBand";
 import { useAppDispatch, useAppSelector } from "../../services/redux/hooks";
@@ -77,6 +78,10 @@ const APIShower = () => {
         setFormManipulation({...formManipulation, manipulate: false});
     }
 
+    const handleChangeDisplay = () => {
+
+    }
+
     return(
         <article className={styles.articleAPIShower}>
             <div className={styles.divLeft}>
@@ -150,15 +155,23 @@ const APIShower = () => {
             </div>
             <APIForm language={language} manipulate={formManipulation} handleClose={handleClose} handleUpdateOrPatch={handleUpdateOrPatch}/>
             <section className={styles.sectionAPIShower}>
-                <ul>{Array.isArray(allBands) &&
-                        allBands.map((band) => {
-                            return <BandCard key={band._id} band={band} />;
-                        }     
-                )}</ul>
-                {/* <div className={styles.divView}>
+                <div className={styles.divView}>
                     <img className={styles.backgroundBands} src={BackgroundFands} alt="backgroundBands" />
+                    <div className={styles.divTopView}>
+                        <button 
+                            className={styles.buttonChange}
+                            onClick={handleChangeDisplay}>
+                            <img src={buttonChangeSVG} alt="buttonChange" />
+                        </button>
+                    </div>
+
+                    <ul className="z-index: 20">{Array.isArray(allBands) &&
+                            allBands.map((band) => {
+                                return <BandCard key={band._id} band={band} />;
+                            }
+                    )}</ul>
                     <pre className={styles.data}>{JSON.stringify(allBands, null, 2)}</pre>
-                </div> */}
+                </div>
             </section>
         </article>
     )

@@ -26,11 +26,17 @@ body {
   margin: 0;
   display: block;
   place-items: center;
+  padding: 0;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+h3 {
+  margin: 0px;
+  font-size: 1vw;
 }
 
 button {
@@ -44,8 +50,20 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 800px) {
+  h3{
+    font-size: 8px;
+  }
 }
 
 @media (prefers-color-scheme: light) {
